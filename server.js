@@ -6,7 +6,10 @@ import { Configuration, OpenAIApi } from "openai";
 
 dotenv.config();
 
-const port = 5000;
+//const port = 5000;
+const port = process.env.PORT || 5000;
+
+
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -17,12 +20,18 @@ const openai = new OpenAIApi(configuration);
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 const fetchEntityNames = async () => {
   try {
     // Replace 'YOUR_DOTNET_API_ENDPOINT' with the actual endpoint of your .NET Core API
     const response = await axios.get(
-      "http://localhost:5062/api/Entity/GetAllEntities"
+      "https://featuremarketplacewebapi20231207151555.azurewebsites.net/api/Entity/GetAllEntities"
     );
 
     const entityNames = response.data.map((entity) => entity.entityName);
@@ -95,6 +104,6 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.listen(port, () =>
+app.listen(port, '0.0.0.0' , () =>
   console.log(`Server is running on http://localhost:${port}`)
 );

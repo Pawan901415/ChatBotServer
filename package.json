@@ -4,7 +4,9 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "server": "nodemon server"
+    "server": "pm2 start server.js --name my-server",
+    "build": "pm2 start server.js --name my-server"
+
   },
   "keywords": [],
   "author": "",
