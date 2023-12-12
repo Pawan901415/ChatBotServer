@@ -6,7 +6,6 @@
   "scripts": {
     "server": "pm2 start server.js --name my-server",
     "build": "pm2 start server.js --name my-server"
-
   },
   "keywords": [],
   "author": "",
