@@ -140,7 +140,7 @@ app.post("/", async (req, res) => {
     else if (prompt.includes("tell") && prompt.includes("me") && prompt.includes("about") && prompt.includes("website")) 
     {
       res.status(200).send({
-        bot: "This is a feature sharing marketpalace that makes it easy for Data Scientists to View, Add, Endit and Delete features for training their machine learning models using our 2FA secured application.",
+        bot: "This is a feature sharing marketpalace that makes it easy for Data Scientists to View, Add, Edit and Delete features for training their machine learning models using our 2FA secured application.",
       });
     } 
     else if (prompt.includes("tell") && prompt.includes("can") && prompt.includes("do")) 
