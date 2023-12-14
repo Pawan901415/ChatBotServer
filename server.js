@@ -93,11 +93,13 @@ app.post("/", async (req, res) => {
   try {
     const prompt = req.body.prompt.toLowerCase();
 
-    if (prompt.includes("hello") || prompt.includes("hi")) {
+    if (prompt.includes("search") && prompt.includes("features") && prompt.includes("given") && prompt.includes("entity"))  
+    {
       res.status(200).send({
-        bot: "Hello! How can I help you?",
+        bot: "Type a prompt like 'Get me features for [entity name] entity' ",
       });
-    } else if (prompt.includes("features") && prompt.includes("entity")) {
+    } 
+    else if (prompt.includes("features") && prompt.includes("entity")) {
       // Extract entity name from the user's prompt
       const entityName = extractEntityNameFromPrompt(prompt);
 
@@ -119,8 +121,8 @@ app.post("/", async (req, res) => {
       (prompt.includes("add") && prompt.includes("feature")) ||
       (prompt.includes("add")  && prompt.includes("entities"))||
       (prompt.includes("add")  && prompt.includes("features"))
-    ) {
-
+    ) 
+    {
       res.status(200).send({
         bot: "From the Home page click the add button(to add individual entities) or upload button(as CSV file) to upload your features. Enter the entity name you want to add features to if it exists the features will be added to the existing entity with the same name or enter a unique name to create a new entity to add you features in it.",
       });
@@ -128,12 +130,30 @@ app.post("/", async (req, res) => {
       prompt.includes("entity") ||
       prompt.includes("available entities") ||
       prompt.includes("entities")
-    ) {
+    ) 
+    {
       const entityNames = await fetchEntityNames();      
       res.status(200).send({
         bot: "Here are the available entity names: " + entityNames.join(", "),
       });
     }  
+    else if (prompt.includes("tell") && prompt.includes("me") && prompt.includes("about") && prompt.includes("website")) 
+    {
+      res.status(200).send({
+        bot: "This is a feature sharing marketpalace",
+      });
+    } 
+    else if (prompt.includes("tell") && prompt.includes("can") && prompt.includes("do")) 
+    {
+      res.status(200).send({
+        bot: "You can ask me about how to add entities or features, all the available entities, features in a given entity and much more about our website.",
+      });
+    } 
+    else if (prompt.includes("hello") || prompt.includes("hi")) {
+      res.status(200).send({
+        bot: "Hello! How can I help you?",
+      });
+    }      
     else {
       res.status(200).send({
         bot: "Please provide a valid prompt. You can ask me about how to add entities or features, all the available entities, features in a given entity and much more about our website.",
